@@ -26,7 +26,9 @@ SECRET_KEY = 'django-insecure-(e#@+#aszlq9*hjshww_k&sah3rn3%6zejodsgb8kplz#evjuv
 DEBUG = True
 
 ALLOWED_HOSTS = [
-      'myproject-gxpp.onrender.com',
+    'localhost',
+    '127.0.0.1',
+    'myproject-gxpp.onrender.com',
 ]
 
 
