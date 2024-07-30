@@ -25,11 +25,15 @@ SECRET_KEY = 'django-insecure-(e#@+#aszlq9*hjshww_k&sah3rn3%6zejodsgb8kplz#evjuv
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+<<<<<<< HEAD
 ALLOWED_HOSTS = [
     'localhost',
     '127.0.0.1',
     'myproject-gxpp.onrender.com',
 ]
+=======
+ALLOWED_HOSTS = []
+>>>>>>> 1d41405a366be3d56849b9511858639be6ac9b2c
 
 
 # Application definition
