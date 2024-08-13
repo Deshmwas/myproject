@@ -66,6 +66,7 @@
 #         model = UserProfile
 #         fields = ['user', 'bio']
 
+
 # from rest_framework import serializers
 # from django.contrib.auth.models import User
 # from .models import Event, UserProfile
@@ -81,22 +82,21 @@
 #         fields = '__all__'
 
 # class UserSerializer(serializers.ModelSerializer):
-#     profile = UserProfileSerializer(required=False)
+#     password = serializers.CharField(write_only=True)
 
 #     class Meta:
 #         model = User
-#         fields = ['id', 'username', 'email', 'password', 'profile']
-#         extra_kwargs = {'password': {'write_only': True}}
+#         fields = ('id', 'username', 'first_name', 'last_name', 'email', 'password')
 
 #     def create(self, validated_data):
-#         profile_data = validated_data.pop('profile', {})
-#         password = validated_data.pop('password')
-#         user = User(**validated_data)
-#         user.set_password(password)
-#         user.save()
-#         UserProfile.objects.create(user=user, **profile_data)
+#         user = User.objects.create_user(
+#             username=validated_data['username'],
+#             email=validated_data['email'],
+#             password=validated_data['password'],
+#             first_name=validated_data['first_name'],
+#             last_name=validated_data['last_name']
+#         )
 #         return user
-
 
 from rest_framework import serializers
 from django.contrib.auth.models import User
@@ -118,8 +118,12 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ('id', 'username', 'first_name', 'last_name', 'email', 'password')
+        extra_kwargs = {
+            'username': {'required': False}  # Make the username field optional
+        }
 
     def create(self, validated_data):
+        validated_data['username'] = validated_data['email']  # Set the username to the email
         user = User.objects.create_user(
             username=validated_data['username'],
             email=validated_data['email'],
